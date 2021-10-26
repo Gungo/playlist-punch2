@@ -27,3 +27,4 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ---
 
 This application must be run with a corresponding `server` to login using Spotify **oauth**.
+Check out https://github.com/Gungo/spotify-login-server for more details.
