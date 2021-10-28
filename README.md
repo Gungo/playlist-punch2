@@ -2,7 +2,7 @@ Using the spotify-web-api to create a mini playlist curator.
 
 ## Quick Start
 
-## `npm install`
+### `npm install`
 
 Install dependencies.
 
