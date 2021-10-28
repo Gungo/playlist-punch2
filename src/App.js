@@ -21,6 +21,7 @@ class App extends Component {
     this.state = {
       filter_string: '',
     }
+
   }
 
   getUser() {
@@ -83,6 +84,8 @@ class App extends Component {
         : []
 
     return (
+
+
       <div id="app" className="App">
         {this.state.user
           ?

@@ -1,13 +1,17 @@
 import React, { Component } from 'react'
+import ReactScrollableList from 'react-scrollable-list'
 import Track from './Track.js'
 
+
+
 const playlist_style = {
-  'width': "100%",
-  'height': "1000px",
+  'width': '100%',
   'padding': '4%',
   'text-align': 'center',
-  'margin-bottom': '10%'
+  'margin-bottom': '10%',
 }
+
+
 const ReactFitText = require('react-fittext');
 
 class Playlist extends Component {
@@ -25,15 +29,14 @@ class Playlist extends Component {
         </ReactFitText>
         <img src={playlist.image} style={{ 'width': '100%' }} />
         {playlist.tracks.map(track =>
-          <nav>
-            <li style={{ 'list-style-type': 'none' }}>
-              <Track track={track} />
-            </li>
-          </nav>
+
+          <Track track={track} />
 
         )}
         <p style={{ 'text-align': 'left', 'padding': '1.5%' }}>...</p>
         <br></br>
+
+
       </div>
     )
   }
