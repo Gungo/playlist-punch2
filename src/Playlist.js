@@ -11,7 +11,6 @@ const playlist_style = {
   'margin-bottom': '10%',
 }
 
-
 const ReactFitText = require('react-fittext');
 
 class Playlist extends Component {
@@ -29,9 +28,7 @@ class Playlist extends Component {
         </ReactFitText>
         <img src={playlist.image} style={{ 'width': '100%' }} />
         {playlist.tracks.map(track =>
-
           <Track track={track} />
-
         )}
         <p style={{ 'text-align': 'left', 'padding': '1.5%' }}>...</p>
         <br></br>

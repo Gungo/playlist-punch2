@@ -15,10 +15,8 @@ let unclicked_style = {
 
 class GridItem extends Component {
     render() {
-
         let playlist = this.props.playlist
         return (
-
             <FluidGrid style={unclicked_style}>
                 <Playlist playlist={playlist} />
             </FluidGrid>
