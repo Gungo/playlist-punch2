@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import SignInButton from './SignInButton.js'
-import Header from './Header.js'
-import Filter from './Filter.js'
-import FluidGrid from '@allpro/react-fluid-grid'
-import GridItem from './GridItem.js'
-import Spotify from 'spotify-web-api-js'
+import Header from './components/Header.js'
+import Filter from './components/Filter.js'
+import GridItem from './components/GridItem.js'
+import SignInButton from './components/SignInButton.js'
 import queryString from 'query-string'
+import FluidGrid from '@allpro/react-fluid-grid'
+import Spotify from 'spotify-web-api-js'
 import './App.css'
 
 const spotify_api = new Spotify();
@@ -95,20 +95,6 @@ class App extends Component {
             <Filter onTextChange={text => {
               this.setState({ filter_string: text })
             }} />
-
-            <script src="https://sdk.scdn.co/spotify-player.js"></script>
-            <script>
-              window.onSpotifyWebPlaybackSDKReady = {() => {
-                const params = queryString.parse(window.location.search)
-                const token = params.access_token
-                const webPlayback = new Spotify.Player({
-                  name: "Spotify Web Playback SDK",
-                  getOAuthToken: callback => { callback(token) }
-                })
-                webPlayback.connect();
-              }
-              }
-            </script>
 
             <FluidGrid style={{ 'text-align': 'center' }} container>
               {playlists_to_render.map(playlist =>
