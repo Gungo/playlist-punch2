@@ -49,13 +49,13 @@ class Playlist extends Component {
           {/* right side with buttons */}
           <div className="col-xsm" style={{ 'textAlign': 'right', 'padding': '4%' }}>
             <div className="btn-group-vertical" style={button_style}>
-              <FiPlayCircle size={36} />
+              <FiPlayCircle size={30} />
               <br />
-              <FiRepeat size={36} />
+              <FiRepeat size={30} />
               <br />
-              <GiPlantRoots size={36} />
+              <GiPlantRoots size={30} />
               <br />
-              <GiDandelionFlower size={36} />
+              <GiDandelionFlower size={30} />
               <br />
             </div>
           </div>

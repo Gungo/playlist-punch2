@@ -10,7 +10,6 @@ import Spotify from 'spotify-web-api-js'
 import './App.css'
 
 
-
 const spotify_api = new Spotify();
 
 class App extends Component {

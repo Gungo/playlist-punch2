@@ -4,9 +4,10 @@ import Playlist from './Playlist.js'
 
 let unclicked_style = {
     item: true,
-    flexBasis: '130px',
+    // trial error for iphone to show 1 playlist
+    flexBasis: '390px',
     minWidth: '33%',
-    maxWidth: '75%',
+    maxWidth: '100%',
     'marginLeft': 'auto',
     'marginRight': 'auto'
     //margin: 'auto' //comment this for neat align
