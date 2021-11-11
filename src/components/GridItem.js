@@ -7,8 +7,8 @@ let unclicked_style = {
     flexBasis: '130px',
     minWidth: '33%',
     maxWidth: '75%',
-    'margin-left': 'auto',
-    'margin-right': 'auto'
+    'marginLeft': 'auto',
+    'marginRight': 'auto'
     //margin: 'auto' //comment this for neat align
 }
 

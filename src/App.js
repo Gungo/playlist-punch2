@@ -101,7 +101,7 @@ class App extends Component {
                 this.setState({ filter_string: text })
               }} />
 
-              <FluidGrid style={{ 'text-align': 'center' }} container>
+              <FluidGrid style={{ 'textAlign': 'center' }} container>
                 {playlists_to_render.map(playlist =>
                   <GridItem playlist={playlist} />
                 )}

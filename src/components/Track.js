@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 
 const simple_style = {
-  'font-size': '70%',
-  'text-align': 'left',
-  'margin-left': '1%',
-  'margin-top': '1%'
+  'fontSize': '70%',
+  'textAlign': 'left',
+  'marginLeft': '1%',
+  'marginTop': '1%'
 }
 const simple_track_style = {
-  'text-decoration': 'underline',
+  'textDecoration': 'underline',
   'display': 'inline-block'
 
 }

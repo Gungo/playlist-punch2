@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 const sign_in_style = {
-  'text-align': 'center',
+  'textAlign': 'center',
   'float': 'right'
 }
 
@@ -11,7 +11,7 @@ class LogoutButton extends Component {
 
       <div style={sign_in_style}>
         <a href="https://accounts.spotify.com" class="btn btn-outline">
-          <p style={{ 'font-weight': 'bold' }}>[logout]</p>
+          <p style={{ 'fontWeight': 'bold' }}>[logout]</p>
         </a>
       </div>
 
