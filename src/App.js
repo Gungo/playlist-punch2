@@ -3,10 +3,13 @@ import Header from './components/Header.js'
 import Filter from './components/Filter.js'
 import GridItem from './components/GridItem.js'
 import SignInButton from './components/SignInButton.js'
+import WebPlayback from './components/WebPlayback.js'
 import queryString from 'query-string'
 import FluidGrid from '@allpro/react-fluid-grid'
 import Spotify from 'spotify-web-api-js'
 import './App.css'
+
+
 
 const spotify_api = new Spotify();
 
@@ -20,6 +23,7 @@ class App extends Component {
     }
     this.state = {
       filter_string: '',
+      token: token
     }
 
   }
@@ -84,28 +88,33 @@ class App extends Component {
         : []
 
     return (
+      <>
 
+        <div id="app" className="App">
+          {this.state.user
+            ?
+            <div>
+              <Header playlists={playlists_to_render} data={this.state} />
+              <WebPlayback />
 
-      <div id="app" className="App">
-        {this.state.user
-          ?
-          <div>
-            <Header playlists={playlists_to_render} data={this.state} />
+              <Filter onTextChange={text => {
+                this.setState({ filter_string: text })
+              }} />
 
-            <Filter onTextChange={text => {
-              this.setState({ filter_string: text })
-            }} />
+              <FluidGrid style={{ 'text-align': 'center' }} container>
+                {playlists_to_render.map(playlist =>
+                  <GridItem playlist={playlist} />
+                )}
+              </FluidGrid>
 
-            <FluidGrid style={{ 'text-align': 'center' }} container>
-              {playlists_to_render.map(playlist =>
-                <GridItem playlist={playlist} />
-              )}
-            </FluidGrid>
+            </div>
+            :
+            <SignInButton />
 
-          </div>
-          : <SignInButton />
-        }
-      </div>
+          }
+        </div>
+
+      </>
     )
   }
 }
