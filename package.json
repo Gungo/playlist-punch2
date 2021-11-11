@@ -19,7 +19,7 @@
     "react-scrollable-list": "^1.3.x",
     "reactstrap": "^8.2.x",
     "reset-css": "^5.0.x",
-    "spotify-web-api-js": "^1.2.x"
+    "spotify-web-api-js": "^1.2.xg"
   },
   "scripts": {
     "start": "react-scripts start",
