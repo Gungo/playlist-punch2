@@ -47,7 +47,7 @@ class Playlist extends Component {
           </div>
 
           {/* right side with buttons */}
-          <div className="col-xsm" style={{ 'textAlign': 'right', 'padding': '4%' }}>
+          <div className="col-xsm" style={{ 'textAlign': 'right', 'padding': '15px' }}>
             <div className="btn-group-vertical" style={button_style}>
               <FiPlayCircle size={30} />
               <br />

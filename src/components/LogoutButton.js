@@ -10,7 +10,7 @@ class LogoutButton extends Component {
     return (
 
       <div style={sign_in_style}>
-        <a href='https://accounts.spotify.com' style={{ 'outline': 'none' }} class='btn btn-outline'>
+        <a href='https://accounts.spotify.com' className='btn btn-outline' style={{ 'outline': 'none' }} >
           <p style={{ 'fontWeight': 'bold' }}>[logout]</p>
         </a>
       </div>

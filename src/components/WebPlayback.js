@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { setState, useState, useEffect, } from 'react'
 import queryString from 'query-string'
 import { FiPlayCircle, FiPauseCircle, FiRepeat, } from 'react-icons/fi'
 
@@ -21,11 +21,32 @@ const track = {
 }
 
 function WebPlayback(props) {
+    // initial playback settings
     const [is_paused, setPaused] = useState(false);
     const [is_active, setActive] = useState(false);
     const [current_track, setTrack] = useState(track);
+    // grab token from params
+    const params = queryString.parse(window.location.search);
+    const token = params.access_token;
 
-    // for connecting to spotify
+    // Function to automatically transfer playback to this app
+    // via https://mbell.me/blog/2017-12-29-react-spotify-playback-api/
+    function transferPlayback(device_id) {
+        console.log('Transfering playback.')
+        fetch("https://api.spotify.com/v1/me/player", {
+            method: "PUT",
+            headers: {
+                authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                "device_ids": [device_id],
+                "play": true,
+            }),
+        });
+    }
+
+    // Hook for connecting to spotify
     // via https://developer.spotify.com/documentation/web-playback-sdk/guide/
     useEffect(() => {
         const script = document.createElement("script");
@@ -35,12 +56,8 @@ function WebPlayback(props) {
         document.body.appendChild(script);
 
         window.onSpotifyWebPlaybackSDKReady = () => {
-            const params = queryString.parse(window.location.search);
-            const token = params.access_token;
-
             const player = new window.Spotify.Player({
-                // @TODO fix token 
-                name: 'Playlist Punch SDK',
+                name: 'Playlist Punch 2.0',
                 getOAuthToken: cb => { cb(token); },
                 volume: 0.5
             });
@@ -49,6 +66,7 @@ function WebPlayback(props) {
 
             player.addListener('ready', ({ device_id }) => {
                 console.log('Ready with Device ID', device_id);
+                transferPlayback(device_id);
             });
 
             player.addListener('not_ready', ({ device_id }) => {
@@ -62,7 +80,7 @@ function WebPlayback(props) {
 
                 setTrack(state.track_window.current_track);
                 setPaused(state.paused);
-
+                console.log(state)
                 player.getCurrentState().then(state => {
                     (!state) ? setActive(false) : setActive(true)
                 });
@@ -78,9 +96,10 @@ function WebPlayback(props) {
     // we store the object using the userPlayer() hook
     const [player, setPlayer] = useState(undefined);
 
+
     return (
         <>
-            {is_active
+            {is_active || is_paused
                 ?
                 <div style={{ 'paddingTop': '1%' }}>
 
@@ -98,7 +117,7 @@ function WebPlayback(props) {
                         </button>
                     </div>
 
-                    <img src={current_track.album.images[0].url}
+                    <img src={current_track.album.images[1].url}
                         className="now-playing__cover" alt="" />
 
                     <div className="">
