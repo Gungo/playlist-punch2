@@ -109,7 +109,7 @@ function WebPlayback(props) {
                         </button>
 
                         <button className="btn-spotify" style={minimal_style} onClick={() => { player.togglePlay() }} >
-                            {is_paused ? "play" : "pause"}
+                            {is_paused ? <FiPlayCircle /> : <FiPauseCircle />}
                         </button>
 
                         <button className="btn-spotify" style={minimal_style} onClick={() => { player.nextTrack() }} >
@@ -126,7 +126,7 @@ function WebPlayback(props) {
                                 current_track.name
                             }</div>
 
-                            <div className="now-playing__artist">{
+                            <div className="now-playing__artist" style={{ 'fontWeight': 'bold' }}>{
                                 current_track.artists[0].name
                             }</div>
                         </div>
