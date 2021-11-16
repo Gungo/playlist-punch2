@@ -35,7 +35,7 @@ class App extends Component {
   }
 
   setData() {
-    spotify_api.getUserPlaylists()
+    spotify_api.getUserPlaylists({ limit: 25 })
       .then(playlists_data => {
         let playlists = playlists_data.items
         let track_promises = playlists.map(playlist => {
@@ -48,10 +48,11 @@ class App extends Component {
             let track_data_array = Array.from(track_data.items
               .map(item => item.track))
               .map(track_data => ({
-                name: track_data.name,
-                artist: track_data.artists[0].name,
-                duration_ms: track_data.duration_ms,
-                id: track_data.id
+                // make sure they're not empty
+                name: (track_data) ? track_data.name : '',
+                artist: (track_data) ? track_data.artists[0].name : '',
+                duration_ms: (track_data) ? track_data.duration_ms : '',
+                id: (track_data) ? track_data.id : ''
               }))
             playlists[i].track_datas = track_data_array
           })

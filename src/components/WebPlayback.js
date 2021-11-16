@@ -1,6 +1,7 @@
 import React, { setState, useState, useEffect, } from 'react'
+import Player from './Player.js'
+import { transferPlayback } from './Utils.js'
 import queryString from 'query-string'
-import { FiPlayCircle, FiPauseCircle, FiRepeat, } from 'react-icons/fi'
 
 const minimal_style = {
     'outline': 'none',
@@ -29,23 +30,6 @@ function WebPlayback(props) {
     const params = queryString.parse(window.location.search);
     const token = params.access_token;
 
-    // Function to automatically transfer playback to this app
-    // via https://mbell.me/blog/2017-12-29-react-spotify-playback-api/
-    function transferPlayback(device_id) {
-        console.log('Transfering playback.')
-        fetch("https://api.spotify.com/v1/me/player", {
-            method: "PUT",
-            headers: {
-                authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                "device_ids": [device_id],
-                "play": true,
-            }),
-        });
-    }
-
     // Hook for connecting to spotify
     // via https://developer.spotify.com/documentation/web-playback-sdk/guide/
     useEffect(() => {
@@ -66,7 +50,7 @@ function WebPlayback(props) {
 
             player.addListener('ready', ({ device_id }) => {
                 console.log('Ready with Device ID', device_id);
-                transferPlayback(device_id);
+                transferPlayback(device_id, token);
             });
 
             player.addListener('not_ready', ({ device_id }) => {
@@ -101,41 +85,15 @@ function WebPlayback(props) {
         <>
             {is_active || is_paused
                 ?
-                <div style={{ 'paddingTop': '1%' }}>
 
-                    <div>
-                        <button className="btn-spotify" style={minimal_style} onClick={() => { player.previousTrack() }} >
-                            &lt;&lt;
-                        </button>
-
-                        <button className="btn-spotify" style={minimal_style} onClick={() => { player.togglePlay() }} >
-                            {is_paused ? <FiPlayCircle /> : <FiPauseCircle />}
-                        </button>
-
-                        <button className="btn-spotify" style={minimal_style} onClick={() => { player.nextTrack() }} >
-                            &gt;&gt;
-                        </button>
-                    </div>
-
-                    <img src={current_track.album.images[1].url}
-                        className="now-playing__cover" alt="" />
-
-                    <div className="">
-                        <div className="now-playing__side">
-                            <div className="now-playing__name">{
-                                current_track.name
-                            }</div>
-
-                            <div className="now-playing__artist" style={{ 'fontWeight': 'bold' }}>{
-                                current_track.artists[0].name
-                            }</div>
-                        </div>
-                    </div>
-
-                </div>
+                <Player
+                    player={player}
+                    is_active={is_active}
+                    is_paused={is_paused}
+                    current_track={current_track}
+                />
                 : <></>
             }
-
         </>
     );
 }

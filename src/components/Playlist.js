@@ -53,10 +53,10 @@ class Playlist extends Component {
               <br />
               <FiRepeat size={30} />
               <br />
-              <GiPlantRoots size={30} />
+              {/* <GiPlantRoots size={30} />
               <br />
               <GiDandelionFlower size={30} />
-              <br />
+              <br /> */}
             </div>
           </div>
 
