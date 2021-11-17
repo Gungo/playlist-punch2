@@ -1,7 +1,6 @@
 import React, { Component, useState, useEffect } from 'react'
 import { HiHeart, HiOutlineHeart } from 'react-icons/hi'
 import Spotify from 'spotify-web-api-js'
-import axios from 'axios'
 
 const spotify_api = new Spotify()
 
@@ -13,33 +12,20 @@ const minimal_style = {
 
 function Player(props) {
 
-    const [current_track_liked, setCurrentTrackLiked] = useState(null)
+    const [current_track_liked, setCurrentTrackLiked] = useState('')
 
     useEffect(() => {
         async function getData() {
             const response = await spotify_api.containsMySavedTracks([props.current_track.id])
 
+            console.log('res0: ', response)
             setCurrentTrackLiked(response)
-            console.log('res: ', response)
+            console.log('res1: ', response)
         }
         getData()
 
-        props.player.addListener('player_state_changed', (state => {
-            if (!state) {
-                return;
-            }
+    }, [props.current_track])
 
-            getData();
-        }));
-
-
-
-    }, [])
-
-
-
-
-    console.log('curr:', current_track_liked)
 
 
     return (
@@ -82,7 +68,13 @@ function Player(props) {
                         </button>
 
                         <div className='row-sm' style={{ 'paddingLeft': '1%' }}>
-                            {current_track_liked ? <HiHeart size={24} /> : <HiOutlineHeart size={24} />}
+                            {console.log('curr: ', current_track_liked)}
+                            {
+                                (current_track_liked[0] == true) // need to grab boolean from list
+                                    ? <HiHeart size={24} />
+                                    : <HiOutlineHeart size={24} />
+                            }
+
                         </div>
 
 
