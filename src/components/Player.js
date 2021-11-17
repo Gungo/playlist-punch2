@@ -7,7 +7,6 @@ const spotify_api = new Spotify()
 const minimal_style = {
     'outline': 'none',
     'border': 'none',
-    'padding': 'none',
 }
 
 
@@ -18,7 +17,7 @@ function Player(props) {
     useEffect(() => {
         async function getData() {
             const response = await spotify_api.containsMySavedTracks([props.current_track.id])
-
+            console.log('res: ', response)
             setCurrentTrackLiked(response)
         }
         getData()
@@ -67,7 +66,7 @@ function Player(props) {
                         </button>
 
                         <div className='row-sm'>
-                            <button className="btn" style={minimal_style}>
+                            <a style={{ 'paddingLeft': '5px' }}>
                                 {console.log('curr: ', current_track_liked)}
                                 {
                                     (current_track_liked[0] == true) // need to grab boolean from list
@@ -75,7 +74,7 @@ function Player(props) {
                                         : <HiOutlineHeart size={24} />
                                 }
 
-                            </button>
+                            </a>
 
                         </div>
 
