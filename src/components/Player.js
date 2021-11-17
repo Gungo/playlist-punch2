@@ -7,6 +7,7 @@ const spotify_api = new Spotify()
 const minimal_style = {
     'outline': 'none',
     'border': 'none',
+    'padding': 'none',
 }
 
 
@@ -18,9 +19,7 @@ function Player(props) {
         async function getData() {
             const response = await spotify_api.containsMySavedTracks([props.current_track.id])
 
-            console.log('res0: ', response)
             setCurrentTrackLiked(response)
-            console.log('res1: ', response)
         }
         getData()
 
@@ -32,7 +31,7 @@ function Player(props) {
         <>
             <div class='row' style={{ 'paddingTop': '20px' }}>
 
-                <div className='col-md' style={{ 'paddingBottom': '5px' }}>
+                <div className='col-sm' style={{ 'paddingBottom': '5px' }}>
                     <img src={props.current_track.album.images[1].url}
                         className='now-playing__cover' alt='' />
                 </div>
@@ -67,13 +66,16 @@ function Player(props) {
                             &gt;&gt;
                         </button>
 
-                        <div className='row-sm' style={{ 'paddingLeft': '1%' }}>
-                            {console.log('curr: ', current_track_liked)}
-                            {
-                                (current_track_liked[0] == true) // need to grab boolean from list
-                                    ? <HiHeart size={24} />
-                                    : <HiOutlineHeart size={24} />
-                            }
+                        <div className='row-sm'>
+                            <button className="btn" style={minimal_style}>
+                                {console.log('curr: ', current_track_liked)}
+                                {
+                                    (current_track_liked[0] == true) // need to grab boolean from list
+                                        ? <HiHeart size={24} />
+                                        : <HiOutlineHeart size={24} />
+                                }
+
+                            </button>
 
                         </div>
 
