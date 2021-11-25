@@ -14,6 +14,7 @@ function Player(props) {
 
     const [current_track_liked, setCurrentTrackLiked] = useState('')
 
+    // hook to gre current track wihtin likes info
     useEffect(() => {
         async function getData() {
             const response = await spotify_api.containsMySavedTracks([props.current_track.id])
@@ -28,29 +29,16 @@ function Player(props) {
 
     return (
         <>
-            <div className='row' style={{ 'paddingTop': '20px' }}>
+            <div className='row' style={{ 'padding': '10px' }}>
 
                 <div className='col-sm' style={{ 'paddingBottom': '10px' }}>
                     <img src={props.current_track.album.images[1].url}
                         className='now-playing__cover' alt='' />
                 </div>
 
-                <div className='col-sm' >
+                <div className='col-xsm' >
 
-                    <div className='now-playing__side' style={{ 'textAlign': 'right' }}>
-                        <h2>[ current playback ]</h2>
-                        <div className='now-playing__name'>{
-                            props.current_track.name
-                        }</div>
-
-                        <div className='now-playing__artist' style={{ 'fontWeight': 'bold' }}>{
-                            props.current_track.artists[0].name
-                        }</div>
-                    </div>
-                </div>
-
-                <div className='col-md' >
-                    <div>
+                    <div style={{ 'textAlign': 'right', 'paddingLeft': '10px' }}>
                         <h2>[ controls ]</h2>
 
                         <button className='btn-spotify' style={minimal_style} onClick={() => { props.player.previousTrack() }} >
@@ -66,7 +54,7 @@ function Player(props) {
                         </button>
 
                         <div className='row-sm'>
-                            <a style={{ 'paddingLeft': '5px' }}>
+                            <a style={{ 'paddingRight': '27%' }}>
                                 {console.log('curr: ', current_track_liked)}
                                 {
                                     (current_track_liked[0] == true) // need to grab boolean from list
@@ -80,9 +68,24 @@ function Player(props) {
 
 
                     </div>
+
+
                 </div>
 
-            </div>
+                <div className='col-md' >
+                    <div className='now-playing__side' >
+                        <h2>[ current playback ]</h2>
+                        <div className='now-playing__name'>{
+                            props.current_track.name
+                        }</div>
+
+                        <div className='now-playing__artist' style={{ 'fontWeight': 'bold' }}>{
+                            props.current_track.artists[0].name
+                        }</div>
+                    </div>
+                </div>
+
+            </div >
         </>
     )
 
