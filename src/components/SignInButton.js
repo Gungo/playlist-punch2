@@ -14,7 +14,7 @@ class SignInButton extends Component {
         <a className="btn btn-outline" style={{ 'outline': 'none' }} onClick={() => {
           window.location = window.location.href.includes('localhost')
             ? 'http://localhost:8888/login'
-            : 'https://playlist-punch-backend.herokuapp.com/login'
+            : 'https://playlist-punch2-backend.herokuapp.com/login'
         }} >
           <p style={{ 'fontWeight': 'bold' }}>[sign in with Spotify]</p>
         </a>
