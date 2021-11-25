@@ -2,7 +2,7 @@
   "name": "playlist_punch2",
   "version": "0.1.0",
   "engines": {
-    "node": "12.22.x"
+    "node": "12.22.7"
   },
   "private": true,
   "dependencies": {
