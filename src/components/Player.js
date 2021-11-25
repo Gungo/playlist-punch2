@@ -28,17 +28,17 @@ function Player(props) {
 
     return (
         <>
-            <div class='row' style={{ 'paddingTop': '20px' }}>
+            <div className='row' style={{ 'paddingTop': '20px' }}>
 
-                <div className='col-sm' style={{ 'paddingBottom': '5px' }}>
+                <div className='col-sm' style={{ 'paddingBottom': '10px' }}>
                     <img src={props.current_track.album.images[1].url}
                         className='now-playing__cover' alt='' />
                 </div>
 
-                <div className='col-md' style={{ 'textAlign': 'right' }}>
-                    <h2>[ current playback ]</h2>
+                <div className='col-sm' >
 
-                    <div className='now-playing__side'>
+                    <div className='now-playing__side' style={{ 'textAlign': 'right' }}>
+                        <h2>[ current playback ]</h2>
                         <div className='now-playing__name'>{
                             props.current_track.name
                         }</div>
