@@ -67,7 +67,9 @@ class App extends Component {
             name: item.name,
             image: item.images.length > 0 ? item.images[0].url : [],
             description: item.description.length > 0 ? item.description : [],
-            tracks: item.track_datas
+            tracks: item.track_datas,
+            id: item.id,
+            uri: item.uri,
           }
         })
       }))

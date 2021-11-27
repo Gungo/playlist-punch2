@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { play_something } from './Player.js'
 import Track from './Track.js'
 import { GiPlayButton, GiPauseButton, GiPlantRoots, GiCycle, GiDandelionFlower } from "react-icons/gi";
 import { FiPlayCircle, FiPauseCircle, FiRepeat, } from 'react-icons/fi'
@@ -20,13 +21,14 @@ const ReactFitText = require('react-fittext');
 class Playlist extends Component {
   render() {
     let playlist = this.props.playlist
+
     playlist.end_char = (playlist.name.length > 32) ? '...' : ''
     playlist.tracks.map(track => {
       track.end_char = (track.name.length > 24) ? '...' : ''
     })
     return (
 
-      <div id='element' style={playlist_style}>
+      <div id='element' style={playlist_style} onClick={() => { play_something(this.props.playlist.uri) }}>
 
         {/* playlist title */}
         <ReactFitText minFontSize='8' maxFontSize='16px'>
@@ -39,7 +41,7 @@ class Playlist extends Component {
 
         <div className='row' style={{ 'paddingTop': '2%' }}>
           {/* left side of playlist with tracks */}
-          <div class='col-10' >
+          <div className='col-10' >
             {playlist.tracks.map(track =>
               <Track track={track} />
             )}

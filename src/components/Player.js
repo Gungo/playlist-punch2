@@ -11,6 +11,24 @@ const minimal_style = {
     'border': 'none',
 }
 
+// play something
+export async function play_something(context_uri) {
+
+    // works like this or context_uri can play playlists
+    // let options = {
+    //     'context_uri': 'spotify:playlist:6PliLQS2cUWDbEJjcF1gXN'
+    // }
+    console.log('uri: ', context_uri)
+    await spotify_api.play({ context_uri }).then(
+        function (data) {
+            console.log('Playing: ', data)
+        },
+        function (err) {
+            console.error(err);
+        }
+    )
+
+}
 
 function Player(props) {
 
@@ -21,7 +39,6 @@ function Player(props) {
         async function is_current_track_liked() {
             const response = await spotify_api.containsMySavedTracks([props.current_track.id])
 
-            console.log("res: ", response[0])
             set_current_track_liked(response[0])
         }
         is_current_track_liked()
@@ -50,6 +67,8 @@ function Player(props) {
         console.log("Toggle shuffle ><")
         await spotify_api.setShuffle([!props.shuffle])
     }
+
+
 
     return (
         <>
@@ -109,6 +128,7 @@ function Player(props) {
                             props.current_track.artists[0].name
                         }</div>
                     </div>
+
                 </div>
 
             </div >
