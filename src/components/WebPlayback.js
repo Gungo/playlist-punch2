@@ -1,6 +1,6 @@
 import React, { setState, useState, useEffect, } from 'react'
 import Player from './Player.js'
-import { transferPlayback } from './Utils.js'
+import { transfer_playback } from './Utils.js'
 import queryString from 'query-string'
 
 const minimal_style = {
@@ -23,10 +23,10 @@ const track = {
 
 function WebPlayback(props) {
     // initial playback settings
-    const [is_paused, setPaused] = useState(false);
-    const [is_active, setActive] = useState(false);
-    const [shuffle, setShuffle] = useState(false);
-    const [current_track, setTrack] = useState(track);
+    const [is_paused, set_paused] = useState(false);
+    const [is_active, set_active] = useState(false);
+    const [shuffle, set_shuffle] = useState(false);
+    const [current_track, set_track] = useState(track);
     // grab token from params
     const params = queryString.parse(window.location.search);
     const token = params.access_token;
@@ -47,11 +47,11 @@ function WebPlayback(props) {
                 volume: 0.5
             });
 
-            setPlayer(player);
+            set_player(player);
 
             player.addListener('ready', ({ device_id }) => {
                 console.log('Ready with Device ID', device_id);
-                transferPlayback(device_id, token);
+                transfer_playback(device_id, token);
             });
 
             player.addListener('not_ready', ({ device_id }) => {
@@ -63,12 +63,12 @@ function WebPlayback(props) {
                     return;
                 }
 
-                setTrack(state.track_window.current_track)
-                setPaused(state.paused)
-                setShuffle(state.shuffle)
+                set_track(state.track_window.current_track)
+                set_paused(state.paused)
+                set_shuffle(state.shuffle)
 
                 player.getCurrentState().then(state => {
-                    (!state) ? setActive(false) : setActive(true)
+                    (!state) ? set_active(false) : set_active(true)
                 });
 
             }));
@@ -80,12 +80,11 @@ function WebPlayback(props) {
 
     // once the Player object has been successfully created, 
     // we store the object using the userPlayer() hook
-    const [player, setPlayer] = useState(undefined);
-
+    const [player, set_player] = useState(undefined);
 
     return (
         <>
-            {is_active || is_paused
+            {is_active || is_paused // if in active state or currently paused
                 ?
 
                 <Player

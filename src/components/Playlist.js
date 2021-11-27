@@ -39,24 +39,20 @@ class Playlist extends Component {
 
         <div className='row' style={{ 'paddingTop': '2%' }}>
           {/* left side of playlist with tracks */}
-          <div class='col-md' >
+          <div class='col-10' >
             {playlist.tracks.map(track =>
               <Track track={track} />
             )}
-            <p style={{ 'textAlign': 'left', 'padding': '1.5%' }}>...</p>
+            <p style={{ 'textAlign': 'left', 'paddingLeft': '1%' }}>...</p>
           </div>
 
           {/* right side with buttons */}
-          <div className="col-xsm" style={{ 'textAlign': 'right', 'padding': '15px' }}>
+          <div className="col-1" style={{ 'paddingTop': '2%' }}>
             <div className="btn-group-vertical" style={button_style}>
               <FiPlayCircle size={30} />
               <br />
               <FiRepeat size={30} />
               <br />
-              {/* <GiPlantRoots size={30} />
-              <br />
-              <GiDandelionFlower size={30} />
-              <br /> */}
             </div>
           </div>
 

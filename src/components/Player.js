@@ -1,6 +1,7 @@
 import React, { Component, useState, useEffect } from 'react'
 import { HiHeart, HiOutlineHeart } from 'react-icons/hi'
 import { MdShuffle, MdShuffleOn } from 'react-icons/md'
+import { } from './SpotifyHelper'
 import Spotify from 'spotify-web-api-js'
 
 const spotify_api = new Spotify()
@@ -13,25 +14,26 @@ const minimal_style = {
 
 function Player(props) {
 
-    const [current_track_liked, setCurrentTrackLiked] = useState('')
+    const [current_track_liked, set_current_track_liked] = useState(false)
 
     // hook to get current track within likes info
     useEffect(() => {
-        async function getData() {
+        async function is_current_track_liked() {
             const response = await spotify_api.containsMySavedTracks([props.current_track.id])
 
-            setCurrentTrackLiked(response)
+            console.log("res: ", response[0])
+            set_current_track_liked(response[0])
         }
-        getData()
+        is_current_track_liked()
 
-    }, [props.current_track]) // hook occurs whenver current_track changes (i think)
+    }, [props.current_track]) // hook occurs whenever current_track changes (i think)
 
     // adds track to library
     async function save_track(track) {
         console.log("Saving track: ", track)
         const response = await spotify_api.addToMySavedTracks([track.id])
 
-        setCurrentTrackLiked(true)
+        set_current_track_liked(true)
 
     }
 
@@ -40,67 +42,63 @@ function Player(props) {
         console.log("Removing track: ", track)
         const response = await spotify_api.removeFromMySavedTracks([track.id])
 
-        setCurrentTrackLiked(false)
+        set_current_track_liked(false)
     }
 
     // toggles shuffle playback
     async function toggle_shuffle() {
+        console.log("Toggle shuffle ><")
         await spotify_api.setShuffle([!props.shuffle])
     }
 
     return (
         <>
-            <div className='row' style={{ 'padding': '10px' }}>
+            <div className='row' style={{ 'padding': '2%' }}>
 
-                <div className='col-sm' style={{ 'paddingBottom': '10px' }}>
+                {/* track art */}
+                <div className='col-sm-5 ms-auto' style={{ 'paddingBottom': '10px' }}>
                     <img src={props.current_track.album.images[1].url}
                         className='now-playing__cover' alt='' />
                 </div>
 
-                <div className='col-xsm' >
-
+                {/* controls */}
+                <div className='col-sm-3 ms-auto' >
                     <div style={{ 'textAlign': 'right', 'paddingLeft': '10px' }}>
-
                         <h2>[ controls ]</h2>
 
+                        {/* playback */}
                         <button className='btn-spotify' style={minimal_style} onClick={() => { props.player.previousTrack() }} >
                             &lt;&lt;
                         </button>
-
                         <button className='btn-spotify' style={minimal_style} onClick={() => { props.player.togglePlay() }} >
                             {props.is_paused ? 'play' : 'pause'}
                         </button>
-
                         <button className='btn-spotify' style={minimal_style} onClick={() => { props.player.nextTrack() }} >
                             &gt;&gt;
                         </button>
 
+                        {/* heart */}
                         <div style={{ 'paddingTop': '2%' }}>
                             <a>
-                                {
-                                    (current_track_liked[0] == true) // need to grab boolean from list
-                                        ? <HiHeart size={24} onClick={() => { remove_track(props.current_track) }} />
-                                        : <HiOutlineHeart size={24} onClick={() => { save_track(props.current_track) }} />
-                                }
+                                {(current_track_liked == true)
+                                    ? <HiHeart size={24} onClick={() => { remove_track(props.current_track) }} />
+                                    : <HiOutlineHeart size={24} onClick={() => { save_track(props.current_track) }} />}
                             </a>
                         </div>
 
+                        {/* shuffle */}
                         <div style={{ 'paddingTop': '5%' }} onClick={() => { toggle_shuffle() }}>
                             <a>
-                                {console.log("[]", props)}
-                                {
-                                    (props.shuffle == true)
-                                        ? <MdShuffleOn size={24} />
-                                        : <MdShuffle size={24} />
-                                }
+                                {(props.shuffle == true)
+                                    ? <MdShuffleOn size={24} />
+                                    : <MdShuffle size={24} />}
                             </a>
                         </div>
-
                     </div>
-
                 </div>
 
-                <div className='col-md' >
+                {/* current playback */}
+                <div className='col-md-4 ms-auto' >
                     <div className='now-playing__side' >
                         <h2 style={{ 'paddingBottom': '2px' }}>[ current playback ]</h2>
                         <div className='now-playing__name'>{
