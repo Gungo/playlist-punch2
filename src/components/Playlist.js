@@ -37,9 +37,9 @@ class Playlist extends Component {
         {/* image */}
         <img src={playlist.image} style={{ 'width': '100%' }} />
 
-        <div className="row">
+        <div className='row' style={{ 'paddingTop': '2%' }}>
           {/* left side of playlist with tracks */}
-          <div class="col-md">
+          <div class='col-md' >
             {playlist.tracks.map(track =>
               <Track track={track} />
             )}

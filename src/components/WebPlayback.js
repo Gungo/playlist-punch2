@@ -25,6 +25,7 @@ function WebPlayback(props) {
     // initial playback settings
     const [is_paused, setPaused] = useState(false);
     const [is_active, setActive] = useState(false);
+    const [shuffle, setShuffle] = useState(false);
     const [current_track, setTrack] = useState(track);
     // grab token from params
     const params = queryString.parse(window.location.search);
@@ -62,9 +63,10 @@ function WebPlayback(props) {
                     return;
                 }
 
-                setTrack(state.track_window.current_track);
-                setPaused(state.paused);
-                console.log(state)
+                setTrack(state.track_window.current_track)
+                setPaused(state.paused)
+                setShuffle(state.shuffle)
+
                 player.getCurrentState().then(state => {
                     (!state) ? setActive(false) : setActive(true)
                 });
@@ -90,6 +92,7 @@ function WebPlayback(props) {
                     player={player}
                     is_active={is_active}
                     is_paused={is_paused}
+                    shuffle={shuffle}
                     current_track={current_track}
                 />
                 : <></>

@@ -16,6 +16,7 @@
     "fitty": "^2.2.x",
     "react": "^16.12.x",
     "react-dom": "^16.12.x",
+    "react-dropdown": "^1.9.2",
     "react-fittext": "^1.0.x",
     "react-icons": "^4.3.x",
     "react-native": "^0.61.x",
