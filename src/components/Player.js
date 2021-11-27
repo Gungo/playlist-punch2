@@ -53,10 +53,10 @@ function Player(props) {
 
     return (
         <>
-            <div className='row' style={{ 'padding': '2%' }}>
+            <div className='row' style={{ 'paddingTop': '2%' }}>
 
                 {/* track art */}
-                <div className='col-sm-5 ms-auto' style={{ 'paddingBottom': '10px' }}>
+                <div className='col-sm-4 ms-auto' style={{ 'paddingBottom': '10px' }}>
                     <img src={props.current_track.album.images[1].url}
                         className='now-playing__cover' alt='' />
                 </div>
