@@ -4,6 +4,7 @@ import Filter from './components/Filter.js'
 import GridItem from './components/GridItem.js'
 import SignInButton from './components/SignInButton.js'
 import WebPlayback from './components/WebPlayback.js'
+import { random_array_shuffle } from './components/Utils.js'
 import queryString from 'query-string'
 import FluidGrid from '@allpro/react-fluid-grid'
 import Spotify from 'spotify-web-api-js'
@@ -35,7 +36,7 @@ class App extends Component {
   }
 
   setData() {
-    spotify_api.getUserPlaylists({ limit: 25 })
+    spotify_api.getUserPlaylists({ limit: 40 })
       .then(playlists_data => {
         let playlists = playlists_data.items
         let track_promises = playlists.map(playlist => {
@@ -64,12 +65,12 @@ class App extends Component {
         playlists: playlists.map(item => {
           console.log(item)
           return {
-            name: item.name,
-            image: item.images.length > 0 ? item.images[0].url : [],
-            description: item.description.length > 0 ? item.description : [],
-            tracks: item.track_datas,
-            id: item.id,
-            uri: item.uri,
+            name: (item) ? item.name : '',
+            image: (item.images.length > 0) ? item.images[0].url : [],
+            description: (item.description.length > 0) ? item.description : [],
+            tracks: (item) ? item.track_datas : [],
+            uri: (item) ? item.uri : '',
+            id: (item) ? item.id : '',
           }
         })
       }))
@@ -88,6 +89,8 @@ class App extends Component {
           playlist.name.toLowerCase().includes(
             this.state.filter_string.toLowerCase()))
         : []
+    // randomize playlists on render for variety
+    playlists_to_render = random_array_shuffle(playlists_to_render)
 
     return (
       <>

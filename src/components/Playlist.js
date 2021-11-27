@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { play_something } from './Player.js'
 import Track from './Track.js'
-import { GiPlayButton, GiPauseButton, GiPlantRoots, GiCycle, GiDandelionFlower } from "react-icons/gi";
-import { FiPlayCircle, FiPauseCircle, FiRepeat, } from 'react-icons/fi'
+import { FiPlayCircle, FiPauseCircle } from 'react-icons/fi'
+import { MdRepeat, MdRepeatOn, MdRepeatOneOn } from 'react-icons/md'
 
 const playlist_style = {
   'width': '100%',
@@ -13,7 +13,8 @@ const playlist_style = {
 
 const button_style = {
   'paddingTop': '4%',
-  'margin': '4%',
+  'right': 'auto'
+  // 'right': '-0.25rem',
 }
 
 const ReactFitText = require('react-fittext');
@@ -28,7 +29,7 @@ class Playlist extends Component {
     })
     return (
 
-      <div id='element' style={playlist_style} onClick={() => { play_something(this.props.playlist.uri) }}>
+      <div id='element' style={playlist_style} >
 
         {/* playlist title */}
         <ReactFitText minFontSize='8' maxFontSize='16px'>
@@ -37,7 +38,7 @@ class Playlist extends Component {
         </ReactFitText>
 
         {/* image */}
-        <img src={playlist.image} style={{ 'width': '100%' }} />
+        <img src={playlist.image} style={{ 'width': '100%' }} onClick={() => { play_something(this.props.playlist.uri) }} />
 
         <div className='row' style={{ 'paddingTop': '2%' }}>
           {/* left side of playlist with tracks */}
@@ -49,11 +50,11 @@ class Playlist extends Component {
           </div>
 
           {/* right side with buttons */}
-          <div className="col-1" style={{ 'paddingTop': '2%' }}>
+          <div className="col-1 float-end">
             <div className="btn-group-vertical" style={button_style}>
-              <FiPlayCircle size={30} />
+              <FiPlayCircle size={30} onClick={() => { play_something(this.props.playlist.uri) }} />
               <br />
-              <FiRepeat size={30} />
+              <MdRepeat size={32} />
               <br />
             </div>
           </div>
