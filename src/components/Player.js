@@ -1,7 +1,6 @@
 import React, { Component, useState, useEffect } from 'react'
 import { HiHeart, HiOutlineHeart } from 'react-icons/hi'
 import { MdShuffle, MdShuffleOn } from 'react-icons/md'
-import { handle_playlist_select } from './Playlist'
 import Spotify from 'spotify-web-api-js'
 
 const spotify_api = new Spotify()
@@ -29,8 +28,6 @@ export async function play_something(context_uri) {
 
     return response
 }
-
-
 
 function Player(props) {
 
@@ -69,8 +66,6 @@ function Player(props) {
         console.log("Toggle shuffle ><")
         await spotify_api.setShuffle([!props.shuffle])
     }
-
-
 
     return (
         <>
@@ -115,6 +110,8 @@ function Player(props) {
                                     : <MdShuffle size={24} />}
                             </a>
                         </div>
+
+
                     </div>
                 </div>
 

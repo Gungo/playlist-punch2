@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { play_something } from './Player.js'
 import Track from './Track.js'
+import { play_something } from './Player.js'
+import { GiSpeaker } from 'react-icons/gi'
 import { FiPlayCircle, FiPauseCircle } from 'react-icons/fi'
 import { MdRepeat, MdRepeatOn, MdRepeatOneOn } from 'react-icons/md'
-import { GiSpeaker } from 'react-icons/gi'
+
 
 const playlist_style = {
   'width': '100%',
@@ -17,12 +18,13 @@ const button_style = {
   'right': 'auto'
   // 'right': '-0.25rem',
 }
+
 const ReactFitText = require('react-fittext');
 
 // just for brevity, I would do this inline in practice.
 const random = () => Math.floor(Math.random() * 255);
 
-let selected_playlist = {}
+let selected_playlists = []
 
 // handle playlist select function
 // @todo fix bug where doesn't re-render until search
@@ -31,7 +33,7 @@ async function handle_playlist_select(playlist) {
   console.log('Selected playlist: ', playlist)
 
   // update selected_playlists & play playlist based by context_uri 
-  selected_playlist = playlist
+  selected_playlists.push(playlist)
   const response = play_something(playlist.uri)
 
 }
@@ -45,10 +47,13 @@ class Playlist extends Component {
       track.end_char = (track.name.length > 24) ? '...' : ''
     })
 
-    // boolean function true if selected playlist matches this playlist 
+    // checks if selected_playlists most recent (last) playlist matches passed playlist 
     function playlist_selected(playlist) {
-      let fin = (selected_playlist && selected_playlist.id == playlist.id) ? true : false
-      console.log("fin: ", fin, playlist)
+      let fin =
+        // if playlist isnt empty, compare the last element's id
+        (selected_playlists[0] && selected_playlists[selected_playlists.length - 1].id == playlist.id)
+          ? true : false
+      // console.log("fin: ", fin, playlist)
 
       return fin
     }
@@ -100,6 +105,7 @@ class Playlist extends Component {
               <br />
               <MdRepeat size={30} />
               <br />
+              <p>made by </p>{ }
             </div>
           </div>
 

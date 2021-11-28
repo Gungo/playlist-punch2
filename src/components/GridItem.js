@@ -7,7 +7,7 @@ let unclicked_style = {
     // trial error for iphone to show 1 playlist
     flexBasis: '390px',
     minWidth: '33%',
-    maxWidth: '100%',
+    maxWidth: '600px',
     'marginLeft': 'auto',
     'marginRight': 'auto'
     //margin: 'auto' //comment this for neat align
