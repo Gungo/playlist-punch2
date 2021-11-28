@@ -27,6 +27,7 @@ function WebPlayback(props) {
     const [is_active, set_active] = useState(false);
     const [shuffle, set_shuffle] = useState(false);
     const [current_track, set_track] = useState(track);
+
     // grab token from params
     const params = queryString.parse(window.location.search);
     const token = params.access_token;

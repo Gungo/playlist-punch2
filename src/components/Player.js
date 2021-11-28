@@ -1,7 +1,7 @@
 import React, { Component, useState, useEffect } from 'react'
 import { HiHeart, HiOutlineHeart } from 'react-icons/hi'
 import { MdShuffle, MdShuffleOn } from 'react-icons/md'
-import { } from './SpotifyHelper'
+import { handle_playlist_select } from './Playlist'
 import Spotify from 'spotify-web-api-js'
 
 const spotify_api = new Spotify()
@@ -11,24 +11,26 @@ const minimal_style = {
     'border': 'none',
 }
 
-// play something
-export async function play_something(context_uri) {
 
-    // works like this or context_uri can play playlists
-    // let options = {
-    //     'context_uri': 'spotify:playlist:6PliLQS2cUWDbEJjcF1gXN'
-    // }
+
+// play something by context_uri
+export async function play_something(context_uri) {
+    // example for playlist
+    // 'spotify:playlist:6PliLQS2cUWDbEJjcF1gXN'
     console.log('uri: ', context_uri)
-    await spotify_api.play({ context_uri }).then(
-        function (data) {
-            console.log('Playing: ', data)
+    const response = await spotify_api.play({ context_uri }).then(
+        function (response) {
+            console.log('Playing: ', response)
         },
         function (err) {
             console.error(err);
         }
     )
 
+    return response
 }
+
+
 
 function Player(props) {
 
