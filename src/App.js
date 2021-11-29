@@ -36,7 +36,7 @@ class App extends Component {
   }
 
   setData() {
-    spotify_api.getUserPlaylists({ limit: 25 })
+    spotify_api.getUserPlaylists({ limit: 25 }) // change playlist limit
       .then(playlists_data => {
         let playlists = playlists_data.items
         let track_promises = playlists.map(playlist => {
@@ -72,7 +72,6 @@ class App extends Component {
             tracks: (item) ? item.track_datas : [],
             uri: (item) ? item.uri : '',
             id: (item) ? item.id : '',
-
           }
         })
       }))

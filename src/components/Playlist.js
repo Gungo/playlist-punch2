@@ -10,18 +10,24 @@ const playlist_style = {
   'width': '100%',
   'padding': '4%',
   'textAlign': 'center',
-  'marginBottom': '10%',
+  'marginBottom': '7%',
 }
 
-const button_style = {
-  'paddingTop': '4%',
-  'right': 'auto'
-  // 'right': '-0.25rem',
+const right_column_style = {
+  'paddingTop': '2%',
+  'paddingLeft': '0',
+  'paddingRight': '0',
+  'right': '3%',
+}
+
+const btn_group_style = {
+  'display': 'flex',
+  'alignItems': 'center',
 }
 
 const ReactFitText = require('react-fittext');
 
-// just for brevity, I would do this inline in practice.
+// just for brevity
 const random = () => Math.floor(Math.random() * 255);
 
 let selected_playlists = []
@@ -29,36 +35,38 @@ let selected_playlists = []
 // handle playlist select function
 // @todo fix bug where doesn't re-render until search
 async function handle_playlist_select(playlist) {
-  // print contents
+  // print selected
   console.log('Selected playlist: ', playlist)
 
-  // update selected_playlists & play playlist based by context_uri 
-  selected_playlists.push(playlist)
+  // update selected_playlists if not already selected
+  selected_playlists.indexOf(playlist) == -1 ? selected_playlists.push(playlist) : console.log('Playlist already selected.')
+  // play playlist based by context_uri
   const response = play_something(playlist.uri)
 
+  // print all
+  console.log('Selected playlists: ', selected_playlists)
 }
 
 class Playlist extends Component {
   render() {
     let playlist = this.props.playlist
 
+    // some text trimming
     playlist.end_char = (playlist.name.length > 32) ? '...' : ''
     playlist.tracks.map(track => {
       track.end_char = (track.name.length > 24) ? '...' : ''
     })
 
-    // checks if selected_playlists most recent (last) playlist matches passed playlist 
+    // checks if some selected playlist matches this playlist
     function playlist_selected(playlist) {
       let fin =
-        // if playlist isnt empty, compare the last element's id
-        (selected_playlists[0] && selected_playlists[selected_playlists.length - 1].id == playlist.id)
+        (selected_playlists[0] && selected_playlists.some(p => p.id === playlist.id))
           ? true : false
       // console.log("fin: ", fin, playlist)
-
       return fin
     }
-    return (
 
+    return (
       <div id='element' style={playlist_style} >
 
         {/* playlist title */}
@@ -73,7 +81,6 @@ class Playlist extends Component {
               <div>
                 <GiSpeaker size={28} style={{ 'paddingBottom': '8px' }} />
               </div>
-
             </div>
           </>
           :
@@ -85,13 +92,12 @@ class Playlist extends Component {
           </>
         }
 
-
         {/* image */}
-        <img src={playlist.image} style={{ 'width': '100%' }} onClick={() => { }} />
+        <img src={playlist.image} style={{ 'width': '100%' }} onClick={() => { handle_playlist_select(playlist) && this.forceUpdate() }} />
 
+        {/* left side of playlist with tracks */}
         <div className='row' style={{ 'paddingTop': '2%' }}>
-          {/* left side of playlist with tracks */}
-          <div className='col-10' >
+          <div className='col-11' >
             {playlist.tracks.map(track =>
               <Track track={track} />
             )}
@@ -99,16 +105,23 @@ class Playlist extends Component {
           </div>
 
           {/* right side with buttons */}
-          <div className="col-1 float-end">
-            <div className="btn-group-vertical" style={button_style}>
-              <FiPlayCircle size={30} onClick={() => { handle_playlist_select(this.props.playlist) && this.forceUpdate() }} />
+          <div className="col-1" style={right_column_style}>
+            <div className="btn-group-vertical" style={btn_group_style}>
+              <FiPlayCircle size={30} onClick={() => { handle_playlist_select(playlist) && this.forceUpdate() }} />
               <br />
               <MdRepeat size={30} />
               <br />
-              <p>made by </p>{ }
+              <MdRepeat size={30} />
+              <br /><MdRepeat size={30} />
+              <br />
             </div>
           </div>
 
+          {/* playlist owner credit */}
+          <div style={{ 'fontSize': '7px', 'paddingLeft': '4%' }}>
+            <p>[ made by</p>
+            <p style={{ 'fontWeight': 'bold' }}> {playlist.owner.display_name} ]</p>
+          </div>
         </div>
 
         <br></br>

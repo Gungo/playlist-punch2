@@ -19,7 +19,7 @@ export async function play_something(context_uri) {
     console.log('uri: ', context_uri)
     const response = await spotify_api.play({ context_uri }).then(
         function (response) {
-            console.log('Playing: ', response)
+            console.log('Playing Something...', response)
         },
         function (err) {
             console.error(err);
