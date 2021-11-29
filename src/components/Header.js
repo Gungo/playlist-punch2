@@ -10,7 +10,7 @@ class Header extends Component {
         return (
             <div>
                 <LogoutButton />
-                <h1><u>{this.props.data.user.name}</u></h1>
+                <h1><u>{this.props.data.user.name}</u> | <i>   Playlist Punch  </i></h1>
                 <PlaylistCounter playlists={this.props.playlists} />
                 <HoursCounter playlists={this.props.playlists} />
                 <ToggleButton />
