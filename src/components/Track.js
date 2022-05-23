@@ -4,7 +4,6 @@ const simple_style = {
   'fontSize': '70%',
   'textAlign': 'left',
   'marginLeft': '1%',
-  'marginTop': '1%'
 }
 const simple_track_style = {
   'textDecoration': 'underline',
