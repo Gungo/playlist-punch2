@@ -32,6 +32,7 @@ function WebPlayback(props) {
     const params = queryString.parse(window.location.search);
     const token = params.access_token;
 
+
     // Hook for connecting to spotify
     // via https://developer.spotify.com/documentation/web-playback-sdk/guide/
     useEffect(() => {
