@@ -28,17 +28,16 @@ function WebPlayback(props) {
     const [shuffle, set_shuffle] = useState(false);
     const [current_track, set_track] = useState(track);
 
-    // grab token from params
-    const params = queryString.parse(window.location.search);
-    const token = params.access_token;
-
-
     // Hook for connecting to spotify
     // via https://developer.spotify.com/documentation/web-playback-sdk/guide/
     useEffect(() => {
         const script = document.createElement("script");
         script.src = "https://sdk.scdn.co/spotify-player.js";
         script.async = true;
+
+        // grab token from params
+        const params = queryString.parse(window.location.search);
+        const token = params.access_token;
 
         document.body.appendChild(script);
 
@@ -53,7 +52,20 @@ function WebPlayback(props) {
 
             player.addListener('ready', ({ device_id }) => {
                 console.log('Ready with Device ID', device_id);
-                transfer_playback(device_id, token);
+                // Automatically transfer playback to this app
+                // via https://mbell.me/blog/2017-12-29-react-spotify-playback-api/
+                console.log('Transfering playback.')
+                fetch("https://api.spotify.com/v1/me/player", {
+                    method: "PUT",
+                    headers: {
+                        authorization: `Bearer ${token}`,
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        "device_ids": [device_id],
+                        "play": true,
+                    }),
+                });
             });
 
             player.addListener('not_ready', ({ device_id }) => {
@@ -80,8 +92,8 @@ function WebPlayback(props) {
         };
     }, []);
 
-    // once the Player object has been successfully created, 
-    // we store the object using the userPlayer() hook
+    // Once the Player object has been successfully created, 
+    // We store the object using the userPlayer() hook
     const [player, set_player] = useState(undefined);
 
     return (

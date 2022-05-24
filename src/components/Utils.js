@@ -2,8 +2,7 @@
  * Utility Functions
 *********************/
 
-// Function to automatically transfer playback to this app
-// via https://mbell.me/blog/2017-12-29-react-spotify-playback-api/
+
 export const transfer_playback = (device_id, token) => {
     console.log('Transfering playback.')
     fetch("https://api.spotify.com/v1/me/player", {
