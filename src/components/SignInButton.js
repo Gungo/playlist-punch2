@@ -35,7 +35,7 @@ class SignInButton extends Component {
 
           <br />
           {/*  TV thing */}
-          <div class="center rounded border" style={player_wrapper_style}>
+          <div class="center rounded" style={player_wrapper_style}>
             {/* Render a Yadult swim youtube video */}
             <ReactPlayer playing={true} style={react_player_style}
               url='https://www.youtube.com/watch?v=ewZXPSCTJxU'
