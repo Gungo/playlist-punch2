@@ -96,7 +96,7 @@ class Playlist extends Component {
         <img src={playlist.image} style={{ 'width': '100%' }} onClick={() => { handle_playlist_select(playlist) && this.forceUpdate() }} />
 
         {/* left side of playlist with tracks */}
-        <div className='row' style={{ 'paddingTop': '2%' }}>
+        <div className='row' style={{ 'paddingTop': '2%', 'overflow-y': 'auto', 'max-height': '666px' }}>
           <div className='col-11' >
             {playlist.tracks.map(track =>
               <Track track={track} />
