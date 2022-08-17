@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Track from './Track.js'
+import SpotifyButton from './SpotifyButton.js'
 import { play_something } from './Player.js'
 import { GiSpeaker } from 'react-icons/gi'
 import { FiPlayCircle, FiPauseCircle } from 'react-icons/fi'
@@ -78,17 +79,27 @@ class Playlist extends Component {
                 <h6 style={{ 'fontWeight': 'bold', 'color': `rgb(${random()}, ${random()}, ${random()})`, }}>
                   {playlist.name.slice(0, 32)}{playlist.end_char}</h6>
               </div>
+
               <div>
+
                 <GiSpeaker size={28} style={{ 'paddingBottom': '8px' }} />
               </div>
             </div>
           </>
           :
           <>
-            <ReactFitText minFontSize='8' maxFontSize='16px'>
-              <h3 style={{ 'fontWeight': 'bold' }}>
-                {playlist.name.slice(0, 32)}{playlist.end_char}</h3>
-            </ReactFitText>
+
+            <div style={{ 'textAlign': 'center' }}>
+              <ReactFitText minFontSize='10px' maxFontSize='16px'>
+                <h3 style={{ 'fontWeight': 'bold' }}>
+                  {playlist.name.slice(0, 32)}{playlist.end_char}</h3>
+
+              </ReactFitText>
+
+            </div>
+
+
+
           </>
         }
 
@@ -122,6 +133,7 @@ class Playlist extends Component {
             <p>[ made by</p>
             <p style={{ 'fontWeight': 'bold' }}> {playlist.owner.display_name} ]</p>
           </div>
+          <SpotifyButton url={playlist.uri} text='*' />
         </div>
 
         <br></br>

@@ -1,4 +1,5 @@
 import React, { Component, useState, useEffect } from 'react'
+import SpotifyButton from './SpotifyButton.js'
 import { HiHeart, HiOutlineHeart } from 'react-icons/hi'
 import { MdShuffle, MdShuffleOn } from 'react-icons/md'
 import Spotify from 'spotify-web-api-js'
@@ -128,6 +129,8 @@ function Player(props) {
                         }</div>
                     </div>
 
+                    {console.log(props.current_track)}
+                    <SpotifyButton url={props.current_track.uri} text='~' />
                 </div>
 
             </div >

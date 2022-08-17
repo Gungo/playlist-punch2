@@ -53,7 +53,8 @@ class App extends Component {
                 name: (track_data) ? track_data.name : '',
                 artist: (track_data) ? track_data.artists[0].name : '',
                 duration_ms: (track_data) ? track_data.duration_ms : '',
-                id: (track_data) ? track_data.id : ''
+                id: (track_data) ? track_data.id : '',
+                uri: (track_data) ? track_data.uri : '',
               }))
             playlists[i].track_datas = track_data_array
           })

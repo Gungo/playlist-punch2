@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ReactPlayer from 'react-player'
+import SpotifyButton from './SpotifyButton.js'
 import { FaSpotify } from 'react-icons/fa'
 
 const sign_in_style = {
