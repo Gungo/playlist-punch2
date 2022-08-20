@@ -30,9 +30,9 @@ class SignInButton extends Component {
               ? 'http://localhost:8888/login'
               : 'https://playlist-punch2-backend.herokuapp.com/login'
           }} >
-            <p style={{ 'fontWeight': 'bold' }}>[sign in with Spotify]</p>
+            <p style={{ 'fontWeight': 'bold' }}>[sign in with spotify]</p>
           </a>
-          <FaSpotify />
+          <FaSpotify style={{ 'color': 'rgb(30, 215, 96)' }} />
 
           <br />
           {/*  TV thing */}
