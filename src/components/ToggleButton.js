@@ -12,22 +12,18 @@ class ToggleButton extends Component {
       dark_mode: true
     }
     return (
-      <>
-        <button>dark mode disabled for spotify logo compatibility</button>
-      </>
+      <button style={{ 'marginTop': '1%' }} className='btn btn-outline-light' onClick={() => {
+        this.state.dark_mode
+          ? enableDarkMode({ brightness: 180, contrast: -1000, sepia: 115 }) // light
+          : enableDarkMode({ brightness: 77, contrast: 172 }) // dark
+        this.state.dark_mode = !this.state.dark_mode
+      }
+      }>
+        dark/light
+      </button>
     )
-    //   return (
-    //     <button style={{ 'marginTop': '1%' }} className='btn btn-outline-light' onClick={() => {
-    //       this.state.dark_mode
-    //         ? enableDarkMode({ brightness: 180, contrast: -85, sepia: 115 }) // light
-    //         : enableDarkMode({ brightness: 85, contrast: 110, sepia: 45 }) // dark
-    //       this.state.dark_mode = !this.state.dark_mode
-    //     }
-    //     }>
-    //       dark mode for spotify logo compatibility*
-    //     </button>
-    //   )
-    // }
+
+
   }
 }
 
