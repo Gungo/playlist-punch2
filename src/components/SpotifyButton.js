@@ -10,7 +10,7 @@ class SpotifyButton extends Component {
                     <a className="btn btn-outline" style={{ 'outline': 'none' }} href={this.props.url}>
                         <p style={{ 'fontWeight': 'bold' }}>{this.props.text}</p>
                     </a>
-                    <FaSpotify style={{ 'color': 'rgb(30, 215, 96)', 'font-size': '120px' }} />
+                    <FaSpotify style={{ 'color': 'rgb(30, 215, 96)', }} />
                 </div >
             </>
 
