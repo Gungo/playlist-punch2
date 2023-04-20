@@ -24,12 +24,6 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
----
-
-This application must be run with a corresponding `server` to login using Spotify **oauth**.
-Check out https://github.com/Gungo/spotify-login-server for more details.
-
-
 ## Firebase Remote Deployment
 
 To login: ```firebase login```
@@ -41,3 +35,9 @@ The app must be built and then deployed:
 ```npm run build```
 
 ```firebase deploy```
+
+---
+
+This application must be run with a corresponding `server` to login using Spotify **oauth**.
+Check out https://github.com/Gungo/spotify-login-server for more details.
+
