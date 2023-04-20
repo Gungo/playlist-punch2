@@ -33,7 +33,7 @@ class SignInButton extends Component {
             <p style={{ 'fontWeight': 'bold' }}>[ sign in with spotify ]</p>
           </a> */}
 
-          <p style={{ 'fontWeight': 'bold' }}>[ currently unavailable  :\ ]</p>
+          <p style={{ 'fontWeight': 'bold' }}>[ currently unavailable :\ ]</p>
           <FaSpotify style={{ 'color': 'rgb(30, 215, 96)' }} />
 
           <br />
