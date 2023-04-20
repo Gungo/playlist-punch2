@@ -25,13 +25,15 @@ class SignInButton extends Component {
       <>
         <div style={sign_in_style}>
 
-          <a className="btn btn-outline" style={{ 'outline': 'none' }} onClick={() => {
+          {/* <a className="btn btn-outline" style={{ 'outline': 'none' }} onClick={() => {
             window.location = window.location.href.includes('localhost')
               ? 'http://localhost:8888/login'
               : 'https://playlist-punch2-backend.herokuapp.com/login'
           }} >
-            <p style={{ 'fontWeight': 'bold' }}>[sign in with spotify]</p>
-          </a>
+            <p style={{ 'fontWeight': 'bold' }}>[ sign in with spotify ]</p>
+          </a> */}
+
+          <p style={{ 'fontWeight': 'bold' }}>[ currently unavailable  :\ ]</p>
           <FaSpotify style={{ 'color': 'rgb(30, 215, 96)' }} />
 
           <br />
